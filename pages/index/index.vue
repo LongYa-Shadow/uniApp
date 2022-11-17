@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import tools from '../../js/tools'
+	import tools from '../../js/tools'
 	export default {
 		data() {
 			return {
@@ -16,10 +16,17 @@ import tools from '../../js/tools'
 			}
 		},
 		onLoad() {
-		tools.test()
+			tools.test()
+			this.test1()
 		},
 		methods: {
-
+			test1() {
+				tools.ajax('/', {
+					echo: "world"
+				}, (data) => {
+					this.title = data
+				}, true)
+			}
 		}
 	}
 </script>
