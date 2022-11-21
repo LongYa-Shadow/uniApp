@@ -16,16 +16,15 @@
 			}
 		},
 		onLoad() {
-			tools.test()
-			this.test1()
+			this.helloWrold()
 		},
 		methods: {
-			test1() {
+			helloWrold() {
 				tools.ajax('/', {
 					echo: "world"
 				}, (data) => {
-					this.title = data
-				}, true)
+					this.title = data.message
+				}, true, 'get')
 			}
 		}
 	}

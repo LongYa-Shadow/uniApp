@@ -1,5 +1,5 @@
 import qs from "qs";
-import md5 from "spark-md5";
+import sparkMd5 from "spark-md5";
 import logger from "./logger";
 import serverInfo from "./server";
 
@@ -84,20 +84,29 @@ tools.empty = () => {}
 
 //md5加密
 tools.md5 = (info) => {
-	return info ? md5(info) : ''
+	return info ? sparkMd5.hash(info) : ''
 }
 
 //Ajax封装
-tools.ajax = (url, parmas, cb, handleMessage, method = "post") => {
+tools.ajax = (url, parmas, cb, handleMessage, method) => {
+	method = method ? method : 'post'
 	cb = cb ? cb : tools.empty()
-	console.log(url, parmas, cb, method, handleMessage);
+	// 请求参数处理
+	let info = qs.stringify(parmas, {
+		allowDots: true
+	})
+	if (method == "get") {
+		url = url + '?' + info
+		info = ""
+	}
+	console.log(url, info, parmas, cb, handleMessage, method);
 	uni.request({
 		url: serverInfo.serverUrl + url,
-		data: parmas,
+		data: info,
 		method: method,
 		header: {
 			token: serverInfo.loadToken(),
-			// 'Content-Type': 'multipart/form-data'
+			'Content-Type': 'application/x-www-form-urlencoded'
 		},
 		success(res) {
 			console.log('ajax请求结果：', res)

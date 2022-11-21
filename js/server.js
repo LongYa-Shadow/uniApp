@@ -9,16 +9,11 @@ serverInfo.websocketUrl = 'wss://huhuiyu.top/teach_project_service/ws/'
 // 本地token信息
 serverInfo.saveToken = (resp) => {
 	if (resp.data && resp.data.token) {
-		uni.setStorage({
-			key: serverInfo.serverTokenKey,
-			data: resp.data.token
-		})
+		uni.setStorageSync(serverInfo.serverTokenKey, resp.data.token)
 	}
 }
 serverInfo.loadToken = () => {
-	let token = uni.getStorage({
-		key: serverInfo.serverTokenKey
-	})
+	let token = uni.getStorageSync(serverInfo.serverTokenKey)
 	return token ? token : ''
 }
 
