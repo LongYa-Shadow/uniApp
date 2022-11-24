@@ -40,13 +40,13 @@
 						complete() {
 							if (data.success) {
 								uni.navigateTo({
-									url: '/pages/index/index'
+									url: '/pages/User'
 								})
 							}
 
 						}
 					})
-				}, true)
+				}, false)
 			}
 		},
 		onLoad() {}

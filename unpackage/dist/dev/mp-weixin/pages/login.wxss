@@ -1,0 +1,28 @@
+
+.tc {
+
+	text-align: center;
+}
+.title {
+	padding: 1rem;
+	font-size: 2rem;
+}
+.input-box {
+	margin: 1rem;
+	border: 1px solid #f00;
+	height: 30px;
+}
+.input-box input {
+	width: 100%;
+}
+.btns {
+	margin: 1rem;
+	padding: 0.2rem;
+	display: flex;
+	justify-content: center;
+}
+.btns button {
+	display: inline-block;
+	margin: 0.5rem;
+}
+

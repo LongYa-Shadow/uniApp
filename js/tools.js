@@ -89,6 +89,7 @@ tools.md5 = (info) => {
 
 //Ajax封装
 tools.ajax = (url, parmas, cb, handleMessage, method) => {
+	handleMessage = handleMessage ? false : true
 	method = method ? method : 'post'
 	cb = cb ? cb : tools.empty()
 	// 请求参数处理
@@ -100,13 +101,15 @@ tools.ajax = (url, parmas, cb, handleMessage, method) => {
 		info = ""
 	}
 	console.log(url, info, parmas, cb, handleMessage, method);
+
 	uni.request({
 		url: serverInfo.serverUrl + url,
 		data: info,
 		method: method,
 		header: {
-			token: serverInfo.loadToken(),
-			'Content-Type': 'application/x-www-form-urlencoded'
+			// 修改为http标准的表单提交模式
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'token': serverInfo.loadToken(),
 		},
 		success(res) {
 			console.log('ajax请求结果：', res)
@@ -120,7 +123,7 @@ tools.ajax = (url, parmas, cb, handleMessage, method) => {
 				return
 			}
 			console.log('自己处理应答结果')
-			serverInfo.saveToken(res.data)
+			serverInfo.saveToken(res)
 			cb(res.data)
 		},
 		fail(error) {
@@ -142,7 +145,6 @@ tools.ajax = (url, parmas, cb, handleMessage, method) => {
 }
 // 获取文件下载地址(未测试)
 tools.getDownloadUrl = (fid) => {
-
 	return uni.downloadFile({
 		url: serverInfo.serverUrl + '/user/file/download?fid=' + fid
 	})

@@ -15,6 +15,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/User",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
